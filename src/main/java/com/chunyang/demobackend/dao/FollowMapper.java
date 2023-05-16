@@ -35,4 +35,7 @@ public interface FollowMapper {
 
     @Select(value = "delete from follow where follower_id = #{followerId} and followed_id = #{followedId}")
     void deleteFollow(@Param("followerId") int followerId, @Param("followedId") int followedId);
+
+    @Select(value = "select * from follow where follower_id = #{followerId} and followed_id = #{followedId}")
+    FollowEntity getFollowerByFollowedIdAndFollowerId(int followedId, int followerId);
 }

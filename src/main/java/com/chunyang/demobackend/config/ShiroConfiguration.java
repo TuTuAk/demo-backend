@@ -68,6 +68,7 @@ public class ShiroConfiguration implements AuthConstant {
     private Map<String, String> buildFilterChainDefinitionMap() {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         filterChainDefinitionMap.put("/api/user/login", "anon");
+        filterChainDefinitionMap.put("/api/user/register", "anon");
         filterChainDefinitionMap.put("/**", JWT_AUTHENTICATION_FILTER);
         return filterChainDefinitionMap;
     }

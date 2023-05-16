@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -74,15 +75,25 @@ public class FollowService {
 
     /**
      * create a new follow relationship
-     * @param followRequest
+     *
+     * @param followDTO
      */
     @Transactional
-    public void createFollow(FollowDTO followRequest) {
-        FollowEntity entity = new FollowEntity();
+    public void createFollow(FollowDTO followDTO) {
         UserDTO user = UserContext.getUser();
-        BeanUtils.copyProperties(followRequest, entity);
+        if (followRelationshipExist(user.getId(), followDTO.getFollowedId()))
+            return;
+
+        FollowEntity entity = new FollowEntity();
+        BeanUtils.copyProperties(followDTO, entity);
         entity.setFollowerId(user.getId());
         followMapper.insertFollow(entity);
+    }
+
+    private boolean followRelationshipExist(Integer followerId, Integer followedId) {
+        FollowEntity follow
+                = followMapper.getFollowerByFollowedIdAndFollowerId(followedId, followerId);
+        return !Objects.isNull(follow);
     }
 
 

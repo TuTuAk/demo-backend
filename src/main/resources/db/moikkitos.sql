@@ -69,7 +69,7 @@ CREATE TABLE `follow` (
                           KEY `followed_id` (`followed_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
+CREATE UNIQUE INDEX idx_unique_follow ON follow (follower_id, followed_id);
 --
 -- Dumping data for table `follow`
 --
