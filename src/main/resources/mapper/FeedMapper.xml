@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chunyang.demobackend.dao.FeedMapper">
+
+    <insert id="insertFeed" parameterType="com.chunyang.demobackend.entity.FeedEntity">
+        INSERT INTO feed (user_id,user_name, content)
+        VALUES (#{userId}, #{userName}, #{content})
+    </insert>
+
+    <delete id="deleteFeedById" parameterType="Integer">
+        DELETE FROM feed WHERE id = #{id}
+    </delete>
+
+    <update id="updateFeed" parameterType="com.chunyang.demobackend.entity.FeedEntity">
+        UPDATE feed SET user_id = #{userId}, #{userName}, content = #{content}, updated_at = CURRENT_TIMESTAMP
+        WHERE id = #{id}
+    </update>
+
+    <select id="getFeedById" parameterType="Integer" resultType="com.chunyang.demobackend.entity.FeedEntity">
+        SELECT * FROM feed WHERE id = #{id}
+    </select>
+
+    <select id="getFeedsByUserId" parameterType="String" resultType="com.chunyang.demobackend.entity.FeedEntity">
+        SELECT * FROM feed WHERE user_id = #{userId}
+    </select>
+
+    <select id="getAllFeeds" resultType="com.chunyang.demobackend.entity.FeedEntity">
+        SELECT * FROM feed ORDER BY  create_time DESC
+    </select>
+</mapper>
