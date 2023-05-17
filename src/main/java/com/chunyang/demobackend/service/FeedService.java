@@ -100,13 +100,8 @@ public class FeedService {
     }
 
     private FeedDTO convertToFeedDTO(FeedEntity feed) {
-        return new FeedDTO(
-                feed.getId(),
-                feed.getUserId(),
-                feed.getUserName(),
-                feed.getContent(),
-                feed.getCreateTime(),
-                feed.getUpdateTime()
-        );
+        FeedDTO feedDTO = new FeedDTO();
+        BeanUtils.copyProperties(feed,feedDTO);
+        return feedDTO;
     }
 }
