@@ -7,6 +7,7 @@
 - user register
 - user login
 - send a new post
+- search user by username or email address 
 - get all posts
 - view followings, followers
 - follow/unfollow a user
