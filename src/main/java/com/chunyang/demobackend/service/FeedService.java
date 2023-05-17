@@ -32,14 +32,15 @@ public class FeedService {
      */
     @Transactional
     public FeedDTO createFeed(FeedDTO feedDTO) {
-        UserDTO useDto = UserContext.getUser();
-        FeedEntity feed = convertToFeed(feedDTO);
-        feed.setUserId(useDto.getId());
-        UserEntity user = userService.queryUserByUserId(feed.getUserId());
+        UserDTO userDTO = UserContext.getUser();
+        UserEntity user = userService.queryUserByUserId(userDTO.getId());
 
+        FeedEntity feed = convertToFeed(feedDTO);
+        feed.setUserId(userDTO.getId());
         feed.setUserName(user.getName());
         feed.setCreateTime(new Date());
         feed.setUpdateTime(new Date());
+
         feedMapper.insertFeed(feed);
 
         return convertToFeedDTO(feed);
