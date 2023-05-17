@@ -155,6 +155,9 @@ public class UserService implements AuthConstant {
         if(Objects.isNull(user)){
             user = userMapper.getUserByEmail(identity);
         }
+        if(Objects.isNull(user)){
+            throw new BusinessException("user doesn't exist");
+        }
 
         return UserDTO.builder()
                 .id(user.getId())
